@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "jest --watchAll -–coverage"
   },
   "dependencies": {
     "axios": "^0.21.0",
