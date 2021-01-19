@@ -11,14 +11,7 @@ describe('测试searchBar组件初始化 是否正常',()=>{
     it('测试初始化之后搜索框值是否为空',()=>{
         expect(warpper.vm.value).toEqual('');
     })
-    
-    it('测试初始化后 isFocus是否为false', ()=>{
-        expect(warpper.vm.isFocus).toBe(false)
-    })
 
-    it('测试初始化后 dom元素中是否生成搜索按钮但未显示', ()=>{
-        expect(searchBtn.element.style.display).toBe('none');
-    })
 
     //focus事件貌似触发不了
     // it('测试聚焦搜索框后 搜索按钮显示',(done)=>{
