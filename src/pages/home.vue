@@ -13,11 +13,16 @@
 
 import SearchBar from '../components/SearchBar/SearchBar'
 import ComList from '../components/ComList/ComList'
+import { mapState, mapMutations } from 'vuex'
+
 
 export default {
     name: 'App',
     components: {
         SearchBar, ComList
+    },
+    computed: {
+        ...mapState(['list'])
     },
     data(){
         return {
@@ -26,6 +31,7 @@ export default {
         }
     },
     created(){
+        window.vm = this;
         this.getData()
     },
     methods:{
