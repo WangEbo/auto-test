@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.prototype.$request = request;
 
 new Vue({
+    store,
     router,
     store,
     render: h => h(App),
