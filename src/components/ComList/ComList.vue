@@ -1,10 +1,10 @@
 <template>
     <div class="com-list">
         <ul>
-            <li v-for="(item,i) in list" :key="i">
+            <li class="list-item" v-for="(item,i) in list" :key="i">
                 <slot name="listItem" :itemMsg="item"></slot>
             </li>
-            <li v-if="!list.length">暂无数据</li>
+            <li class="no-data" v-show="!list.length">暂无数据</li>
         </ul>
     </div>
 </template>
