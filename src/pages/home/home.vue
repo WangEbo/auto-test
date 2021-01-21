@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <search-bar @search="search" v-model="keyword" @input="searchInput" @clear="searchInput"></search-bar>
+        <search-bar @search="search" @input="searchInput" @clear="inputClear"></search-bar>
         <com-list :list="showList">
             <template v-slot:listItem="{itemMsg}">
                 <span>{{itemMsg.name}}</span> <span>{{itemMsg.age}}</span>
@@ -18,22 +18,17 @@ import { mapState, mapMutations } from 'vuex'
 import { getList } from '../../api/getList'
 
 export default {
-    name: 'App',
+    name: 'Home',
     components: {
         SearchBar, ComList
     },
     computed:{
         ...mapState(['list']),
-        showList(){
-            let list = this.list || [];
-            return this.list.filter( item => {
-                return item.name && item.name.indexOf(this.keyword) > -1 
-            })
-        }
     },
     data(){
         return {
-            keyword: '',   
+            keyword: '',
+            showList:[]
         }
     },
     created(){
@@ -42,25 +37,35 @@ export default {
     methods:{
         ...mapMutations(['addListItem', 'minusListItem']),
         search(str){
-            console.log('search 触发');
+            this.computedShowList();
+        },
+        computedShowList(){
+            this.showList = this.list.filter( item => {
+                return item.name && item.name.indexOf(this.keyword) > -1 
+            })
         },
         getData(){
             getList().then(res=>{
                 let data = res.data;
                 if(data.success){
                     this.addListItem(data.data.rows)
+                    this.computedShowList()
                 }
             })
         },
         searchInput(val){
             this.keyword = val
         },
+        inputClear(val){
+            this.computedShowList();
+        },
         add(){
             let obj = {
                 name: 'name' + (this.list.length+1),
                 age: 20 + this.list.length
             }
-            this.addListItem([obj])
+            this.addListItem([obj]);
+            this.computedShowList();
         }
     }
 }

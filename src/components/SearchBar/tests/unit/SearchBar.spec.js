@@ -21,18 +21,17 @@ describe('测试searchBar组件初始化 是否正常',()=>{
         expect(clearIcon.element.style.display).toBe('none');
     })
 
-    it('测试输入值后clearIcon 显示，并在点击之后值清空,clearnIcon恢复隐藏',async()=>{
-        input.setValue('s');
-        wrapper.vm.$nextTick(async()=>{
-            expect(wrapper.vm.hasVal).toBeTruthy();
-            expect(clearIcon.isVisible()).toBeTruthy(); 
+    it('测试输入值后,searchBar的value 变为输入值，clearIcon 显示，并在点击之后值清空,clearnIcon恢复隐藏',async()=>{
+        await input.setValue('s');//setValue 返回一个 promise 对象，该Promise对象在 resolve 后会保证 组件已更新
 
-            //trigger 模拟触发事件会返回一个 promise 对象，该Promise对象在 resolve 后会保证 组件已更新
-            await clearIcon.trigger('click');
+        expect(wrapper.vm.hasVal).toBeTruthy();
+        expect(clearIcon.isVisible()).toBeTruthy();
+        expect(wrapper.vm.value).toBe('s');
+        //trigger 模拟触发事件会返回一个 promise 对象，该Promise对象在 resolve 后会保证 组件已更新
+        await clearIcon.trigger('click');
 
-            expect(wrapper.vm.hasVal).toBeFalsy();
-            expect(clearIcon.isVisible()).toBeTruthy(); 
-        })
+        expect(wrapper.vm.hasVal).toBeFalsy();
+        expect(clearIcon.isVisible()).toBeFalsy(); 
     })
 
 })

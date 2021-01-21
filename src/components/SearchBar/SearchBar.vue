@@ -1,7 +1,7 @@
 <template>
     <div :class="['search-bar',isFocus ? 'focus' : '']">
         <input ref="input" :class="['search-input',isFocus ? 'focus' : '']" @focus="isFocus=true" @blur="isFocus=false" 
-            placeholder="输入搜索" type="text" :value="value" @input="input(($event.target.value))">
+            placeholder="输入搜索" type="text" v-model="value" @input="input(($event.target.value))">
         <span v-show="hasVal" class="clear-icon" @click="clear">x</span>
         <button class="search-btn" @click="search">搜索</button>
     </div>
@@ -11,15 +11,10 @@
 
 export default {
     name:'search-bar',
-    props:{
-        value:{
-            type: String,
-            default: ''
-        }
-    },
     data(){
         return {
-            isFocus:false
+            isFocus:false,
+            value: ''
         }
     },
     mounted() {
@@ -27,7 +22,7 @@ export default {
     },
     computed:{
         hasVal(){
-            return this.value.length
+            return !!this.value.length
         }
     },
     methods:{
@@ -35,7 +30,9 @@ export default {
             this.$emit('search',this.value)
         },
         clear(){
-            this.$emit('input', '')
+            this.value = '';
+            this.$emit('input', this.value)
+            this.$emit('clear', '')
         },
         input(val){
             this.$emit('input', val)

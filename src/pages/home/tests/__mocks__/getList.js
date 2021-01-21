@@ -1,5 +1,3 @@
-import { resolve } from "core-js/fn/promise"
-
 export default getList = ()=>{
     return new Promise(reslove=>{
         resolve({

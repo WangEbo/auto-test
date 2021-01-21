@@ -1,7 +1,7 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';//导入 测试工具的 mount方法
-import Home from '../../home.vue'
 import SearchBar from '../../../../components/SearchBar/SearchBar.vue'
 import ComList from '../../../../components/ComList/ComList.vue'
+import Home from '../../home.vue'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -64,15 +64,19 @@ describe('测试主页功能',()=>{
         await wrapper.vm.$nextTick();
         let lis = wrapper.findAll('.list-item');
         expect(lis.length).toBe(3);
-        expect(wrapper.text()).toContain('dam');
 
         const input = wrapper.find('.search-input');
-        
-        input.setValue('d');
-        await wrapper.vm.$nextTick();
+        const searchBtn = wrapper.find('.search-btn');
+        const clearIcon = wrapper.find('.clear-icon');
+
+        await input.setValue('d');
+        await searchBtn.trigger('click');
+
         let showLis = wrapper.findAll('.list-item');
         expect(showLis.length).toBe(1);
-        expect(showLis.at(0).text()).toContain('dam')
+
+        await clearIcon.trigger('click');
+        expect(lis.length).toBe(3);
     })
 })
 
