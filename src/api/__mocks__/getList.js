@@ -1,10 +1,10 @@
-export default getList = ()=>{
-    return new Promise(reslove=>{
+export const getList = jest.fn(() => {
+    return new Promise(resolve => {
         resolve({
             code: 200,
             data: {
                 success: 1,
-                data:{
+                data: {
                     rows: [
                         {
                             name: 'dam',
@@ -23,4 +23,4 @@ export default getList = ()=>{
             }
         })
     })
-}
+})

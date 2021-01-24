@@ -1,5 +1,14 @@
-import axios from 'axios'
+import { request } from '../utils/request'
 
 export const getList = ()=>{
-    return axios.get('/list')
+    return request({
+        method: 'get',
+        url: '/list'
+    })
 }
+
+// import axios from 'axios'
+
+// export const getList = ()=>{
+//     return axios.get('/list')
+// }

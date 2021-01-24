@@ -76,7 +76,7 @@ export default {
         .com-list{
             li{
                 display: flex;
-                justify-content: start;
+                justify-content: flex-start;
                 border-bottom: 1px solid #f5f5f5;
                 padding: 10px;
                 span{
